@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, MenuItem, Button } from "@mui/material";
+import { TextField, MenuItem, Button, Typography, Box } from "@mui/material";
 
 const Filter = ({ filters, setFilters, applyFilters }) => {
   const handleInputChange = (e) => {
@@ -8,7 +8,10 @@ const Filter = ({ filters, setFilters, applyFilters }) => {
   };
 
   return (
-    <div>
+    <Box sx={{ p: 2, bgcolor: "background.paper", boxShadow: 1 }}>
+      <Typography variant="h4" gutterBottom>
+        Filter Products
+      </Typography>
       <TextField
         name="category"
         label="Category"
@@ -51,10 +54,11 @@ const Filter = ({ filters, setFilters, applyFilters }) => {
         color="primary"
         onClick={applyFilters}
         fullWidth
+        sx={{ mt: 2 }}
       >
         Apply Filters
       </Button>
-    </div>
+    </Box>
   );
 };
 
