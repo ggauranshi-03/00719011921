@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-const port = 9876;
+const PORT = 9876;
 const windowSize = 10;
 let numbersStore = [];
 let accessToken = "";
@@ -60,9 +60,7 @@ const calculateAverage = (numbers) => {
 
 app.get("/numbers/:numberId", async (req, res) => {
   const numberId = req.params.numberId;
-  console.log(`Received request for number type: ${numberId}`);
   const newNumbers = await getNumbers(numberId, accessToken);
-  console.log(`New numbers received: ${newNumbers}`);
   const uniqueNumbers = newNumbers.filter((num) => !numbersStore.includes(num));
   const windowPrevState = [...numbersStore];
 
@@ -88,8 +86,8 @@ app.get("/numbers/:numberId", async (req, res) => {
 const startServer = async () => {
   accessToken = await authenticate();
   if (accessToken) {
-    app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
     });
   }
 };
