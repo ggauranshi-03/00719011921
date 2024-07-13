@@ -24,21 +24,21 @@ const authenticate = async () => {
   }
 };
 
-const getNumbers = async (type, token) => {
-  const urlMap = {
+const getNum = async (type, token) => {
+  const Map = {
     p: "http://20.244.56.144/test/primes",
     f: "http://20.244.56.144/test/fibo",
     e: "http://20.244.56.144/test/even",
     r: "http://20.244.56.144/test/rand",
   };
 
-  if (!urlMap[type]) {
+  if (!Map[type]) {
     console.error(`Invalid number type: ${type}`);
     return [];
   }
 
   try {
-    const response = await axios.get(urlMap[type], {
+    const response = await axios.get(Map[type], {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -60,7 +60,7 @@ const calculateAverage = (numbers) => {
 
 app.get("/numbers/:numberId", async (req, res) => {
   const numberId = req.params.numberId;
-  const newNumbers = await getNumbers(numberId, accessToken);
+  const newNumbers = await getNum(numberId, accessToken);
   const uniqueNumbers = newNumbers.filter((num) => !numbersStore.includes(num));
   const windowPrevState = [...numbersStore];
 
@@ -83,7 +83,7 @@ app.get("/numbers/:numberId", async (req, res) => {
   });
 });
 
-const startServer = async () => {
+const server = async () => {
   accessToken = await authenticate();
   if (accessToken) {
     app.listen(PORT, () => {
@@ -92,4 +92,4 @@ const startServer = async () => {
   }
 };
 
-startServer();
+server();
