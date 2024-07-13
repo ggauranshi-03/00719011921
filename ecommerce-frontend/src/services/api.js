@@ -1,5 +1,3 @@
-const API_BASE_URL = "http://20.240.50.144/test";
-
 export const getTopProducts = async (
   company,
   category,
